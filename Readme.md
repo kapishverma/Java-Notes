@@ -1,10 +1,17 @@
-[variables](#variables) | [Methods](#methods) | [Data Types in Java](#data-types-in-java) | [primitive](#there-are-8-types-of-primitive-data-types) | [Non-primitive](#non-primitive-data-types) | [Arithmetic Operators and there Precedence ](#arithmetic-operators-and-there-precedence-in-java) | [Decimal <==> Binary](#decimal-to-binary-and-binary-to-decimal) | [Chars](#how-char-is-going-to-store-in-memory) | [Typecasting](#typecasting) | [Some scanner options](#some-scanner-options)
+[variables](#variables) | [Methods](#methods) | [Data Types in Java](#data-types-in-java) | [primitive](#there-are-8-types-of-primitive-data-types) | [Non-primitive](#non-primitive-data-types) | [Arithmetic Operators and there Precedence ](#arithmetic-operators-and-there-precedence-in-java) | [Decimal <==> Binary](#decimal-to-binary-and-binary-to-decimal) | [Chars](#how-char-is-going-to-store-in-memory) | [Typecasting](#typecasting) | [Some scanner options](#some-scanner-options) | [Relational Operators](#relational-logical-and-unary-operators) |[Assignment Operators](#relational-logical-and-unary-operators) |  [Arithmetic Operators](#relational-logical-and-unary-operators) | [Logical Operators](#relational-logical-and-unary-operators) |  [Unary Operators](#relational-logical-and-unary-operators) | [Scope and Lifetime](#scope-and-lifetime)
 
 ># variables
-A variable is the name of a reserved area allocated in memory. In other words, it is a name of the memory location. It is a combination of "vary + able" which means its value can be changed.
+In Java, Variables are the data containers that save the data values during Java program execution. Every Variable in Java is assigned a data type that designates the type and quantity of value it can hold. A variable is the name of a reserved area allocated in memory. In other words, it is a name of the memory location. It is a combination of "vary + able" which means its value can be changed.
+
+while declaring a variable, we need to take care of two things that are:
+
+**datatype:** Type of data that can be stored in this variable.
+**data_name:** Name was given to the variable
+
 ```java
-int data=50;//Here data is variable
+int let =50;//int is data type and Here let is variable
 ```
+
 **Types of Variables**
 There are three types of variables in Java:
 
@@ -12,19 +19,18 @@ There are three types of variables in Java:
 * instance variable
 * static variable
 
-
 1. ***Local Variable:***
 
-Think of local variables as temporary notes you write on a sticky note while working on a task. These notes are specific to that task and are only relevant while you're working on it. Once you're done, you don't need those notes anymore.
-
-In programming, local variables are like notes you create inside a method or a specific part of your code. They hold data that's needed temporarily for that part of the code. Once the method or code block is finished, the local variables disappear, just like your sticky notes after you're done with the task.
+A variable defined within a block or method or constructor is called a local variable.
 
 *Example:*
+In programming, local variables are like notes you create inside a method or a specific part of your code. They hold data that's needed temporarily for that part of the code. Once the method or code block is finished, the local variables disappear, just like your sticky notes after you're done with the task.
+
 Imagine you're baking cookies. While you're mixing the ingredients, you might use a "mixing bowl" to keep track of the current mixture. That mixing bowl is like a local variable. It's relevant only while you're mixing the ingredients, and you don't need it once the cookies are baked.
 
-*  A local variable is declared within a method or block of code.
-* It is accessible only within the block where it's declared.
-* Local variables must be initialized before they are used.
+*  These variables are created when the block is entered, or the function is called and destroyed after exiting from the block or when the call returns from the function.
+* The scope of these variables exists only within the block in which the variables are declared, i.e., we can access these variables only within that block.
+* Initialization of the local variable is mandatory before using it in the defined scope.
 * They don't have default values like instance or class variables.
 
 ```java
@@ -36,17 +42,21 @@ void calculate() {
 
 2. ***Instance Variable (also called Fields):***
 
+Instance variables are non-static variables and are declared in a class outside of any method, constructor, or block.
+
+*Example:*
 Imagine you have a personal notebook where you jot down important things about yourself. Each person has their own notebook, and what you write in your notebook is unique to you.
 
 In programming, instance variables are like those personal notebooks. They belong to each individual object (instance) of a class. Each object can have its own set of instance variables, and the values in these variables can be different for each object.
 
-*Example:*
 Consider a class named Person. Each person has their own name and age, stored in instance variables. So, if you have a class instance for yourself and another for a friend, the name and age instance variables will hold different values for each of you.
 
-* An instance variable is declared within a class but outside any method.
+* An instance variable is declared within a class but outside any method, these variables are created when an object of the class is created and destroyed when the object is destroyed.
+* Unlike local variables, we may use access specifiers for instance variables. If we do not specify any access specifier, then the default access specifier will be used.
+* We initialize instance variables using constructors while creating an object. We can also use instance blocks to initialize the instance variables.
 * Each instance (object) of the class has its own copy of the instance variable.
-* Instance variables are created when an object is instantiated.
-* They have default values (0, null, false) if not explicitly initialized.
+* Instance variables are created when an object is instantiated/by creating objects.
+* Initialization of an instance variable is not mandatory.They have default values (0, null, false) if not explicitly initialized.Its default value is dependent on the data type of variable. For String it is null, for float it is 0.0f, for int it is 0, for Wrapper classes like Integer it is null, etc.
 
 ```java
 class Person {
@@ -57,23 +67,41 @@ class Person {
 
 3. ***Static Variable (also called Class Variable):***
 
+Static variables are also known as **class variables**.
+
+* These variables are declared similarly to instance variables. The difference is that static variables are declared using the static keyword within a class outside of any method, constructor, or block.
+
+*Example:*
+
 Think of static variables as a shared whiteboard that everyone in a class can write on. Any updates you make on the whiteboard are visible to everyone who looks at it.
 
 In programming, static variables are like shared information that's common to all instances of a class. These variables are shared among all objects of the class, and changes made to them are visible to all instances.
 
-*Example:*
+
 Imagine you're in a classroom, and there's a "class count" board that keeps track of the total number of students. Every time a student enters or leaves the class, the count changes. This "class count" board is like a static variable. All students see the same count, and any updates to it are shared among everyone.
 
-* A static variable is declared using the static keyword within a class but outside any method.
-* Unlike instance variables, static variables are shared among all instances of the class.
-* They are created when the class is loaded into memory and exist for the entire program's lifetime.
-* Static variables also have default values (0, null, false) if not explicitly initialized.
+* Unlike instance variables, we can only have one copy of a static variable per class, irrespective of how many objects we create. Static variables are shared among all instances of the class.
+* Static variables are created at the start of program execution(when the class is loaded into memory) and destroyed automatically when execution ends(i.e. exist for the entire program's lifetime).
+* Initialization of a static variable is not mandatory. Its default value is dependent on the data type of variable. For String it is null, for float it is 0.0f, for int it is 0, for Wrapper classes like Integer it is null, etc.
+* If we access a static variable like an instance variable (through an object), the compiler will show a warning message, which won’t halt the program. The compiler will replace the object name with the class name automatically.
+* If we access a static variable without the class name, the compiler will automatically append the class name. But for accessing the static variable of a different class, we must mention the class name as 2 different classes might have a static variable with the same name.
+* Static variables cannot be declared locally inside an instance method.
+* Static blocks can be used to initialize static variables.
+
+
 ```java
 class MathUtility {
     static final double PI = 3.14159; // Static variable
     static int counter = 0;          // Static variable
 }
 ```
+
+##### Differences Between the Instance Variables and the Static Variables
+
+* Each object will have its own copy of an instance variable, whereas we can only have one copy of a static variable per class, irrespective of how many objects we create. Thus, static variables are good for memory management.
+* Changes made in an instance variable using one object will not be reflected in other objects as each object has its own copy of the instance variable. In the case of a static variable, changes will be reflected in other objects as static variables are common to all objects of a class.
+* We can access instance variables through object references, and static variables can be accessed directly using the class name.
+* Instance variables are created when an object is created with the use of the keyword ‘new’ and destroyed when the object is destroyed. Static variables are created when the program starts and destroyed when the program stops.
 
 ***In summary:***
 
@@ -98,6 +126,78 @@ In Java, an instance method is like a set of instructions that's specific to eac
 
 Imagine you're at a school event, and there's a microphone set up for everyone to use. You can step up to the microphone and share your thoughts with everyone in the room.
 In Java, a static method is like something everyone can use without needing their own copy. It's like a set of instructions that's not tied to any specific "person" (object). Just like anyone can use the microphone, any part of the code can use a static method to do something without creating an "object."
+
+
+lets see an example
+```java
+// Class definition
+class Car {
+    // Instance variables
+    String brand;
+    String model;
+
+    // Constructor
+    Car(String brand, String model) {
+        this.brand = brand;
+        this.model = model;
+    }
+
+    // Instance method
+    void startEngine() {
+        System.out.println("Starting the engine of " + brand + " " + model);
+    }
+
+    // Static variable
+    static int numberOfCars = 0;
+
+    // Static method
+    static void increaseCarCount() {
+        numberOfCars++;
+    }
+
+    // Local method
+    void accelerate() {
+        int speed = 50; // Local variable
+        System.out.println("Accelerating " + brand + " " + model + " to " + speed + " km/h");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating objects
+        Car car1 = new Car("Toyota", "Corolla");
+        Car car2 = new Car("Honda", "Civic");
+
+        // Accessing instance variables
+        System.out.println("Car 1: " + car1.brand + " " + car1.model);
+        System.out.println("Car 2: " + car2.brand + " " + car2.model);
+
+        // Accessing instance methods
+        car1.startEngine();
+        car2.startEngine();
+
+        // Accessing static variable and method
+        Car.increaseCarCount();
+        System.out.println("Total cars: " + Car.numberOfCars);
+
+        // Calling local method
+        car1.accelerate();
+        car2.accelerate();
+    }
+}
+```
+**In this example:**
+
+* The Car class defines instance variables (brand and model), an instance method (startEngine()), a static variable (numberOfCars), and a static method (increaseCarCount()).
+* The Car class constructor is used to initialize instance variables when creating objects.
+* In the Main class, we create two Car objects (car1 and car2), each with its own brand and model.
+* We access instance variables using object references (car1.brand).
+* We call instance methods on objects (car1.startEngine()).
+* We access static variables and methods using the class name (Car.increaseCarCount()).
+* The local method accelerate() uses a local variable speed.
+
+ *if you remove the static keyword from the increaseCarCount() method, it will no longer work correctly, and you'll encounter a compilation error. This is because the numberOfCars variable is a static variable, which means it belongs to the class itself rather than any specific instance of the class.
+Non-static (instance) methods can't directly access or modify static variables because static variables are shared among all instances of the class. When you try to access a static variable from a non-static method without specifying an instance, the compiler doesn't know which instance's static variable to access.*
 
 **In summary:**
 
@@ -335,3 +435,152 @@ Some commonly used Scanner class methods are as follows:
 |s.nextDouble()|It scans the next token as a double value.|
 ----
 
+>## Relational, Logical and Unary Operators
+
+
+***1. Arithmetic Operators***
+Arithmetic operators are used to perform common mathematical operations.
+
+
+|Operator|	Name| Description	|Example|
+|-|-|-|-|
+|+	|Addition|	Adds together two values	|x + y|
+|-	|Subtraction|	Subtracts one value from another|	x - y|
+|*	|Multiplication|	Multiplies two values	|x * y|
+|/	|Division	|Divides one value by another	|x / y|
+|%	|Modulus	|Returns the division remainder	|x % y|
+|++	|Increment	|Increases the value of a variable by 1	|++x|
+|--|	Decrement|	Decreases the value of a variable by 1	|--x|
+
+  * *postIncrement and postDecrement*
+    x++ means current value of x will use then it will increment
+    x-- means first use then decrease
+  * *preIncrement and preDecrement*
+    ++x means first increase then use,
+    --x first decrease then use
+
+***2. relational Operators***
+
+```java
+int a = 10;
+int b = 20;
+System.out.print(a > b);// false
+System.out.print(a > b);// false
+System.out.print(a < b);// true
+System.out.print(a == a);// true
+System.out.print(a == b);// false, if we think to compair a = b , this is incorrect bcz here we are assigning b's value to a.
+System.out.print(a != b);// true
+System.out.print(a >= b);// false
+System.out.print(a <= b);// true
+```
+
+***3. Logical Operators***
+   * AND Operator ( && ) – if( a && b ) [if true execute else don’t]
+   * OR Operator ( || ) – if( a || b) [if one of them is true to execute else don’t]
+   * NOT Operator ( ! ) – !(a<b) [returns false if a is smaller than b]
+
+***4. Unary Oprators***
+
+Unary operators are operators in Java that perform operations on a single operand, which means they work with only one value. These operators are commonly used to modify or evaluate the value of a single variable. There are several types of unary operators in Java:
+
+* Unary Plus Operator (+):
+
+The unary plus operator is used to indicate the positive value of a numeric expression. However, it doesn't really change the value of the operand.
+
+```java
+int num = +5; // num is assigned the value 5
+```
+  * Unary Minus Operator (-):
+
+The unary minus operator is used to negate the value of a numeric expression. It changes a positive value to negative and vice versa.
+
+```java
+int num = -5; // num is assigned the value -5
+```
+* Increment Operator (++):
+
+The increment operator increases the value of the operand by 1. It can be used in both prefix and postfix forms.
+
+```java
+int count = 10;
+count++; // count is incremented to 11
+```
+* Decrement Operator (--):
+
+The decrement operator decreases the value of the operand by 1. It can also be used in both prefix and postfix forms.
+
+```java
+int count = 10;
+count--; // count is decremented to 9
+```
+* Logical Complement Operator (!):
+
+The logical complement operator is used to invert the logical value of a boolean expression. If the expression is true, the operator makes it false and vice versa.
+
+```java
+boolean isTrue = true;
+boolean isFalse = !isTrue; // isFalse is assigned the value false
+```
+* Bitwise Complement Operator (~):
+
+The bitwise complement operator is used to invert the bits of a numeric expression. It changes 0s to 1s and 1s to 0s in the binary representation of the number.
+
+```java
+int num = 5; // Binary representation: 00000101
+int complement = ~num; // Binary representation: 11111010
+```
+
+***5. Assignment Operators:***
+
+Assignment operators are used to assign values to variables.
+
+|Operator	|Example	|Same As|
+|-|-|-|
+|=	|x = 5|	x = 5|
+|+=	|x += 3|	x = x + 3|
+|-=	|x -= 3|	x = x - 3|
+|*=	|x *= 3|	x = x * 3|
+|/=	| /= 3|	x = x / 3|
+|%=	|x %= 3|	x = x % 3|
+|&=	|x &= 3|	x = x & 3|
+|`|=`|x `|`= 3|	x = x `|` 3|
+|^=	|x ^= 3	|x = x ^ 3|
+|>>=|x >>= 3| x = x >> 3|
+|<<=|x <<= 3	|x = x << 3|
+
+---
+># Scope and Lifetime
+
+***Instance Variables***
+A variable which is declared inside a class and outside all the methods and blocks is an instance variable. The general scope of an instance variable is throughout the class except in static methods. The lifetime of an instance variable is until the object stays in memory.
+
+***Class Variables***
+A variable which is declared inside a class, outside all the blocks and is marked static is known as a class variable. The general scope of a class variable is throughout the class and the lifetime of a class variable is until the end of the program or as long as the class is loaded in memory.
+
+***Local Variables***
+All other variables which are not instance and class variables are treated as local variables including the parameters in a method. Scope of a local variable is within the block in which it is declared and the lifetime of a local variable is until the control leaves the block in which it is declared.
+
+---
+
+***Print Stars Pattern***
+```java
+//    *
+//   **
+//  ***
+// ****
+//*****
+
+for(int i = 1;i < n;i++){
+    for(int spaces = 1 ; spaces <= n-i ; spaces++){
+        System.out.print(" ");
+    }
+    for(int stars = 1; stars <= i ; stars++){
+        System.out.print("*");
+    }
+            System.out.println()
+}
+```
+
+---
+
+>#
